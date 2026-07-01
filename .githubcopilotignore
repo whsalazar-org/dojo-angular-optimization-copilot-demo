@@ -1,0 +1,27 @@
+# Reduce irrelevant Copilot context for this repository
+
+node_modules/
+**/node_modules/
+
+# Java build outputs
+**/target/
+*.class
+*.jar
+*.war
+
+# Angular/JS build outputs
+.angular/
+dist/
+out/
+build/
+coverage/
+
+# Logs and temp artifacts
+*.log
+*.tmp
+*.cache
+
+# IDE/system noise
+.vscode/
+.idea/
+.DS_Store
