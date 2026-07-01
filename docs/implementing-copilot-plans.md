@@ -35,11 +35,12 @@ Break the plan into 1–3 file changes per task.
 
 ### 2) Pin exact scope in prompts
 
-When asking Copilot for edits, include strict scope:
+When asking Copilot for edits, include controlled scope:
 
 - exact file path
 - exact function/class
-- constraints (no new deps, preserve behavior)
+- constraints (no new deps, do not break functionality contracts)
+- allow limited adjacent context only when needed (for example callers, callees, or related types)
 
 ### 3) Apply minimal diffs
 
@@ -52,6 +53,9 @@ For each task/commit, run only essential checks first:
 - relevant unit/integration tests
 - build/type-check for changed module
 - one runtime sanity check
+- before/after measurements for the selected metric
+
+Ask Copilot what to measure before and after the change; do not rely on fabricated impact estimates.
 
 ### 5) Commit in narrow increments
 
@@ -69,7 +73,7 @@ After each commit, append:
 
 - what was changed
 - test/build status
-- observed impact (if measured)
+- observed impact with actual before/after metrics (if measured)
 - follow-up tasks
 
 ---
@@ -107,9 +111,10 @@ After each commit, append:
 - Tests:
 - Build/type-check:
 - Runtime sanity:
+- Metrics to capture:
 
 ## Results
 - Commits:
-- Impact:
+- Impact (measured):
 - Follow-ups:
 ```

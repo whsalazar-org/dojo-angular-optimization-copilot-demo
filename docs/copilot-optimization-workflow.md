@@ -1,17 +1,20 @@
 # Low-Token Optimization Workflow
 
-This workflow is designed for repositories with mixed stacks (Dojo, Angular, Java) where you want high-quality optimization suggestions with minimal Copilot token usage.
+This workflow is designed for repositories with mixed stacks (Dojo, Angular, Java) where you want high-quality optimization suggestions with efficient token usage and focused context.
+
+Token usage and accuracy are a trade-off: more relevant context can improve accuracy, but unnecessary instructions or unrelated files add cost and noise.
 
 ## 1) Discover (small scope)
 
 - Analyze one module or file at a time.
+- Expand to directly related callers, callees, or types only when needed.
 - Ask for architecture or hotspot hints only for the selected path.
 - Avoid broad prompts like "optimize the whole repo".
 
 Suggested prompt:
 
 ```text
-Analyze ONLY <PATH>. Identify top 3 likely performance hotspots by impact and risk. Keep answer under 200 words.
+Analyze primarily <PATH>. If needed, inspect directly related callers/callees/types only. Identify top 3 likely performance hotspots by impact and risk. Keep answer under 200 words.
 ```
 
 ## 2) Patch (targeted)
@@ -26,14 +29,14 @@ For each change, run only essential checks:
 
 - Existing unit/integration tests touching the path
 - Build/type-check for the modified module
-- One runtime sanity check for behavior parity
+- One runtime sanity check for functionality-contract parity
 
 ## Guardrails
 
-- Preserve behavior first; optimize second.
+- Preserve functionality contracts first; optimize second.
 - Prefer low-risk high-impact changes before deeper refactors.
 - Do not introduce new dependencies unless justified.
-- If context is missing, ask for that exact file/function instead of guessing.
+- If context is missing, ask for that exact file/function or directly related dependency instead of guessing.
 
 ## Optional per-stack emphasis
 
